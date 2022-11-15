@@ -17,7 +17,7 @@ readonly PI_HOLE_GIT_URL="https://github.com/pi-hole/pi-hole.git"
 readonly PI_HOLE_FILES_DIR="/etc/.pihole"
 
 # shellcheck disable=SC2034
-PH_TEST=true
+SKIP_INSTALL=true
 
 # when --check-only is passed to this script, it will not perform the actual update
 CHECK_ONLY=false
@@ -216,9 +216,8 @@ main() {
     fi
 
     if [[ "${FTL_update}" == true || "${core_update}" == true || "${web_update}" == true ]]; then
-        # Force an update of the updatechecker
+        # Update local and remote versions via updatechecker
         /opt/pihole/updatecheck.sh
-        /opt/pihole/updatecheck.sh x remote
         echo -e "  ${INFO} Local version file information updated."
     fi
 
